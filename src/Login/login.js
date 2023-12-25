@@ -16,7 +16,7 @@ export default function Login({ navigation }) {
   const [password, setPassword] = useState("");
 
   const handleinput = () => {
-    if (email === "askuahwah@gmail.com" && password === "12345678") {
+    if (email === "testing@gmail.com" && password === "12345678") {
       navigation.navigate("Home");
     } else {
       alert("Invalid email or password");
