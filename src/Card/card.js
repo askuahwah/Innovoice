@@ -24,6 +24,9 @@ export default function Card({ route }) {
   const handleFanSpeedChange = (newSpeed) => {
     setFanSpeed(newSpeed);
     updateRoom(roomId, { fan_speed: `${newSpeed}%` });
+
+    const sliderValue = (newSpeed * 30) + 105;
+    sendSliderValue(sliderValue);
   };
 
   const handleBulbBrightnessChange = (newBrightness) => {
@@ -54,8 +57,9 @@ export default function Card({ route }) {
             value={parseInt(fanSpeed)}
             onValueChange={handleFanSpeedChange}
             minimumValue={0}
-            maximumValue={100}
+            maximumValue={5}
             step={1}
+
           />
           <Text>Fan Speed: {fanSpeed}</Text>
         </View>
@@ -76,4 +80,11 @@ export default function Card({ route }) {
       </View>
     </SafeAreaView>
   );
+
+  function sendSliderValue(value) {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "http://192.168.43.119/slider?value=" + value, true);
+      xhr.send();
+  }
+
 }
